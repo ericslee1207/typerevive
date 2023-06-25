@@ -1,0 +1,122 @@
+.popup {
+  width: 320px;
+  height: auto;
+  padding: 10px;
+}
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 21px;
+  width: 21px;
+  left: 2px;
+  bottom: 2.3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.slider.active {
+  background-color: #342c84;
+}
+
+.slider.active:before {
+  transform: translateX(26px);
+}
+
+input:checked + .slider {
+  background-color: #342c84;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+ul {
+  list-style: none;
+  padding-left: 10px;
+  font-size: small;
+}
+
+.statuslabel {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.buttondiv {
+  align-items: center;
+  display: flex;
+}
+.reload-button1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 7px;
+  background-color: limegreen;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.reload-button2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 7px;
+  background-color: darkorange;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.reload-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+.reload-button:hover {
+  background-color: #342c84;
+}
+
+.reload-icon {
+  width: 40px;
+  height: 40px;
+  background-image: url("images/refreshicon.png"); /* Replace with your own reload icon */
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.reload-text {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+}
