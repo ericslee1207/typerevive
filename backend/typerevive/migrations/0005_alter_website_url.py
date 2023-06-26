@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('losslesstext', '0004_website_remove_textbox_url_textbox_website'),
+        ("typerevive", "0004_website_remove_textbox_url_textbox_website"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='website',
-            name='url',
+            model_name="website",
+            name="url",
             field=models.CharField(),
         ),
     ]

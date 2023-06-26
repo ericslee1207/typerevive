@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class LosslesstextConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'losslesstext'
+class TypereviveConfig(AppConfig):
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "typerevive"

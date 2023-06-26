@@ -5,19 +5,18 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('losslesstext', '0006_textbox_pcid_website_doa_website_pcid'),
+        ("typerevive", "0006_textbox_pcid_website_doa_website_pcid"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='website',
-            name='doa',
+            model_name="website",
+            name="doa",
         ),
         migrations.AddField(
-            model_name='textbox',
-            name='doa',
+            model_name="textbox",
+            name="doa",
             field=models.DateField(default=datetime.date.today),
         ),
     ]

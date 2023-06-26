@@ -5,28 +5,39 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('losslesstext', '0003_textbox_url'),
+        ("typerevive", "0003_textbox_url"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='website',
+            name="website",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('url', models.URLField()),
-                ('status', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("url", models.URLField()),
+                ("status", models.BooleanField(default=False)),
             ],
         ),
         migrations.RemoveField(
-            model_name='textbox',
-            name='url',
+            model_name="textbox",
+            name="url",
         ),
         migrations.AddField(
-            model_name='textbox',
-            name='website',
-            field=models.ForeignKey(default=0, on_delete=django.db.models.deletion.CASCADE, to='losslesstext.website'),
+            model_name="textbox",
+            name="website",
+            field=models.ForeignKey(
+                default=0,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="typerevive.website",
+            ),
             preserve_default=False,
         ),
     ]

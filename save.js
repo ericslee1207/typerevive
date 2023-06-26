@@ -1,7 +1,7 @@
 console.log("Code injected!");
 
-const textInputFieldsToSave = document.querySelectorAll('input[type="text"]');
-const textareasFieldsToSave = document.getElementsByTagName("textarea");
+let textInputFieldsToSave = document.querySelectorAll('input[type="text"]');
+let textareasFieldsToSave = document.getElementsByTagName("textarea");
 
 const mergedToSave = [...textInputFieldsToSave, ...textareasFieldsToSave];
 
@@ -27,7 +27,7 @@ async function postData(url = "", data = {}) {
 async function createHash(str) {
   const encoder = new TextEncoder();
   const data = encoder.encode(str);
-  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashBuffer = await window.crypto.subtle.digest("SHA-256", data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   const hashHex = hashArray
     .map((byte) => byte.toString(16).padStart(2, "0"))
@@ -35,19 +35,20 @@ async function createHash(str) {
   return hashHex;
 }
 
-const save = async () => {
-  const { uuid } = await chrome.storage.local.get(["uuid"]);
-  const encodedURL = await createHash(window.location.href);
-
-  mergedToSave.forEach((input) => {
-    postData("http://127.0.0.1:8000/tb/create/", {
-      index: indexToSave,
-      content: input.value,
-      url: encodedURL,
-      pcid: uuid,
-      doa: new Date(),
+const save = () => {
+  chrome.storage.local.get(["uuid"]).then(async (result) => {
+    await createHash(window.location.href).then(async (encodedURL) => {
+      mergedToSave.forEach((input) => {
+        postData("http://127.0.0.1:8000/tb/create/", {
+          index: indexToSave,
+          content: input.value,
+          url: encodedURL,
+          pcid: result.uuid,
+          doa: new Date(),
+        });
+        indexToSave++;
+      });
     });
-    indexToSave++;
   });
 };
 

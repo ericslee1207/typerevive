@@ -4,16 +4,15 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('losslesstext', '0002_textbox_index'),
+        ("typerevive", "0002_textbox_index"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='textbox',
-            name='url',
-            field=models.URLField(default='https://www.youtube.com/'),
+            model_name="textbox",
+            name="url",
+            field=models.URLField(default="https://www.youtube.com/"),
             preserve_default=False,
         ),
     ]

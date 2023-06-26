@@ -19,6 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("tb/", include("losslesstext.urls")),
+    path("tb/", include("typerevive.urls")),
     path("api-auth/", include("rest_framework.urls")),
 ]

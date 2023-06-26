@@ -5,27 +5,26 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('losslesstext', '0005_alter_website_url'),
+        ("typerevive", "0005_alter_website_url"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='textbox',
-            name='pcid',
-            field=models.UUIDField(default='0b72bc1e-7fc9-4c85-9967-8e734be61052'),
+            model_name="textbox",
+            name="pcid",
+            field=models.UUIDField(default="0b72bc1e-7fc9-4c85-9967-8e734be61052"),
             preserve_default=False,
         ),
         migrations.AddField(
-            model_name='website',
-            name='doa',
+            model_name="website",
+            name="doa",
             field=models.DateField(default=datetime.date.today),
         ),
         migrations.AddField(
-            model_name='website',
-            name='pcid',
-            field=models.UUIDField(default='0b72bc1e-7fc9-4c85-9967-8e734be61052'),
+            model_name="website",
+            name="pcid",
+            field=models.UUIDField(default="0b72bc1e-7fc9-4c85-9967-8e734be61052"),
             preserve_default=False,
         ),
     ]
