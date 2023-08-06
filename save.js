@@ -39,13 +39,16 @@ const save = () => {
   chrome.storage.local.get(["uuid"]).then(async (result) => {
     await createHash(window.location.href).then(async (encodedURL) => {
       mergedToSave.forEach((input) => {
-        postData("http://127.0.0.1:8000/tb/create/", {
-          index: indexToSave,
-          content: input.value,
-          url: encodedURL,
-          pcid: result.uuid,
-          doa: new Date(),
-        });
+        postData(
+          "https://0o1cuodd67.execute-api.us-west-2.amazonaws.com/production/tb/create/",
+          {
+            index: indexToSave,
+            content: input.value,
+            url: encodedURL,
+            pcid: result.uuid,
+            doa: new Date(),
+          }
+        );
         indexToSave++;
       });
     });

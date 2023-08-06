@@ -16,12 +16,15 @@ const merged = [...textInputFields, ...textareasFields];
 let index = 0;
 
 const handleInputChange = (event, encodedURL, uuid) => {
-  putData("http://127.0.0.1:8000/tb/edit/", {
-    content: event.target.value,
-    index: event.target.index,
-    url: encodedURL,
-    pcid: uuid,
-  })
+  putData(
+    "https://0o1cuodd67.execute-api.us-west-2.amazonaws.com/production/tb/edit/",
+    {
+      content: event.target.value,
+      index: event.target.index,
+      url: encodedURL,
+      pcid: uuid,
+    }
+  )
     .then((json) => {
       console.log(json); // Handle success
     })
@@ -77,13 +80,13 @@ const scriptOn = () => {
   chrome.storage.local.get(["uuid"]).then(async (result) => {
     await createHash(window.location.href).then(async (encodedURL) => {
       const response = await fetch(
-        `http://127.0.0.1:8000/tb/${encodedURL}/${result.uuid}/`
+        `https://0o1cuodd67.execute-api.us-west-2.amazonaws.com/production/tb/${encodedURL}/${result.uuid}/`
       );
 
       const jsonData = response.json();
       jsonData.then(async (res) => {
         const curweb = await fetch(
-          `http://127.0.0.1:8000/tb/getwebs/${encodedURL}/${result.uuid}/`
+          `https://0o1cuodd67.execute-api.us-west-2.amazonaws.com/production/tb/getwebs/${encodedURL}/${result.uuid}/`
         );
         const webData = curweb.json();
         webData.then((web) => {
@@ -92,12 +95,15 @@ const scriptOn = () => {
             merged.forEach((input) => {
               let filtered = res.filter((content) => content.index == index);
               if (filtered.length == 0) {
-                postData("http://127.0.0.1:8000/tb/create/", {
-                  index: index,
-                  content: "none_xyz",
-                  url: encodedURL,
-                  pcid: result.uuid,
-                });
+                postData(
+                  "https://0o1cuodd67.execute-api.us-west-2.amazonaws.com/production/tb/create/",
+                  {
+                    index: index,
+                    content: "none_xyz",
+                    url: encodedURL,
+                    pcid: result.uuid,
+                  }
+                );
                 filtered = [{ index: index, content: "none_xyz" }];
               }
               input.index = index;

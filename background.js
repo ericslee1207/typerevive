@@ -37,28 +37,31 @@ const getStatus = async (ontabchange) => {
   const encodedURL = await createHash(url);
 
   const response = await fetch(
-    `http://127.0.0.1:8000/tb/getwebs/${encodedURL}/${uuid}/`
+    `https://0o1cuodd67.execute-api.us-west-2.amazonaws.com/production/tb/getwebs/${encodedURL}/${uuid}/`
   );
   const jsonData = await response.json();
 
   let status = "";
   if (jsonData.length === 0) {
-    await fetch(`http://127.0.0.1:8000/tb/createweb/`, {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-      body: JSON.stringify({
-        status: false,
-        url: encodedURL,
-        pcid: uuid,
-      }),
-    });
+    await fetch(
+      `https://0o1cuodd67.execute-api.us-west-2.amazonaws.com/production/tb/createweb/`,
+      {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+        },
+        body: JSON.stringify({
+          status: false,
+          url: encodedURL,
+          pcid: uuid,
+        }),
+      }
+    );
     status = false;
   } else {
     status = jsonData[0].status;

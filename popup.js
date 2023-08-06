@@ -52,7 +52,7 @@ const getStatus = async () => {
   const encodedURL = await createHash(url);
 
   const response = await fetch(
-    `http://127.0.0.1:8000/tb/getwebs/${encodedURL}/${uuid}/`
+    `https://0o1cuodd67.execute-api.us-west-2.amazonaws.com/production/tb/getwebs/${encodedURL}/${uuid}/`
   );
   const jsonData = await response.json();
   const status = jsonData[0].status;
@@ -69,34 +69,40 @@ const setStatus = async (enabled) => {
   const url = tab.url;
   const encodedURL = await createHash(url);
 
-  await fetch("http://127.0.0.1:8000/tb/setstatus/", {
-    method: "PUT",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-    body: JSON.stringify({
-      url: encodedURL,
-      status: enabled,
-      pcid: uuid,
-    }),
-  }).then(async () => {
+  await fetch(
+    "https://0o1cuodd67.execute-api.us-west-2.amazonaws.com/production/tb/setstatus/",
+    {
+      method: "PUT",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+      body: JSON.stringify({
+        url: encodedURL,
+        status: enabled,
+        pcid: uuid,
+      }),
+    }
+  ).then(async () => {
     if (!enabled) {
-      await fetch(`http://127.0.0.1:8000/tb/delete/${encodedURL}/${uuid}/`, {
-        method: "POST",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "same-origin",
-        redirect: "follow",
-        referrerPolicy: "no-referrer",
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      }).then(() => {
+      await fetch(
+        `https://0o1cuodd67.execute-api.us-west-2.amazonaws.com/production/tb/delete/${encodedURL}/${uuid}/`,
+        {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "same-origin",
+          redirect: "follow",
+          referrerPolicy: "no-referrer",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+        }
+      ).then(() => {
         window.close();
       });
     } else {
